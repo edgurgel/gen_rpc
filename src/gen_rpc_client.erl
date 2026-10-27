@@ -584,7 +584,7 @@ do_abcast({Node, _Tag}, Name, Msg) when Node =:= node() ->
 do_abcast(Node, Name, Msg) when Node =:= node() ->
     Msg = erlang:send({Name, Node}, Msg);
 do_abcast(Node, Name, Msg) ->
-    erlang:spawn(?MODULE, cast_worker, [Node, {abcast,Name,Msg}, abcast, undefined]).
+    cast_worker(Node, ?ABCAST(Name, Msg), abcast, undefined).
 
 -spec maybe_start_client(node_or_tuple()) -> {ok, pid()} | {error, any()}.
 maybe_start_client(NodeOrTuple) ->
